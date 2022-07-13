@@ -1,0 +1,59 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: spring_boot_baimss
+  datasource:
+      initialize: false
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://shellwe.top:3306/benjamin?serverTimezone=UTC
+      username: shellwe
+      password: SHEllwe_1347
+  freemarker:
+    checkTemplateLocation: false
+  mvc:
+    view:
+      prefix: classpath:/templates/
+      suffix: .html
+  kafka:
+    bootstrap-servers: shellwe.top:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: 1
+      compression-type: snappy
+      retries: 3
+      batch-size: 16384
+      buffer-memory: 33554432
+    consumer:
+      group-id: spring_boot_baimss
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          tokenHeader: X-Token
+
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    root: info
+
+  file:
+    name: server.log
+  logback:
+    rollingpolicy:
+      max-file-size: 1MB
+      file-name-pattern: server.%d.%i.log
+
+
+
